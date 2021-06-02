@@ -14,5 +14,6 @@ export default {
     return instance
       .get(`/users/${username}`)
       .then(result => result.data)
+      .catch(error => console.log(error))
   }
 }

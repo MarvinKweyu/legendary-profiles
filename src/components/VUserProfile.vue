@@ -1,6 +1,6 @@
 <template>
   <div class="user-profile">
-    <img class="user-profile__avatar" :src="user.avatar_url" />
+    <img class="user-profile__avatar img-fluid" :src="user.avatar_url" />
     <div class="user-profile__name">
       {{ user.name }}
     </div>
