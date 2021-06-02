@@ -1,9 +1,13 @@
+jest.mock('@/store/actions') // look for src/store/__mocks__/actions instead of original actions
+
 import { shallowMount , createLocalVue } from "@vue/test-utils";
 import Vuex from 'vuex'
 import UserView from "@/views/UserView";
 import VUserSearchForm from '@/components/VUserSearchForm'
 import VUserProfile from '@/components/VUserProfile'
 import initialState from '@/store/state'
+// import actions, i.e mock file from line 1
+import actions from '@/store/actions'
 import userFixture from './fixtures/user'
 
 const localVue = createLocalVue()
@@ -16,7 +20,10 @@ describe("UserView", () => {
   const build = () =>{
     const wrapper = shallowMount(UserView, {
       localVue,
-      store: new Vuex.Store({state})
+      store: new Vuex.Store({
+        state, 
+        actions
+      })
   
     })
 
@@ -34,6 +41,7 @@ describe("UserView", () => {
   }
 
   beforeEach(() =>{
+    jest.resetAllMocks() //reset mock functions to original states
     // reset the state after each test
     state = { ...initialState}
   })
@@ -58,6 +66,17 @@ describe("UserView", () => {
     const { userProfile } = build()
     //after passing data , confirm that VUserProfile has received the same user// as a prop
     expect(userProfile().vm.user).toBe(state.user)
+  })
+
+  it('searches for a user when received submitted', () =>{
+    const expectedUser = 'kuroski'
+    const { userSearchForm } = build()
+    //manually emit event
+    userSearchForm().vm.$emit('submitted', expectedUser)
+    // expect the store action to be called after the event emission
+    expect(actions.SEARCH_USER).toHaveBeenCalled()
+    // confirm that we are sending the correct payload
+    expect(actions.SEARCH_USER.mock.calls[0][1]).toEqual({username: expectedUser})
   })
   
 });
