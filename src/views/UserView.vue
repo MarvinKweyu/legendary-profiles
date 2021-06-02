@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <VUserSearchForm @submitted="searchUser" />
-    <VUserProfile :user="user" />
+    <VUserProfile :user="user" class="mt-3" />
   </div>
 </template>
 
