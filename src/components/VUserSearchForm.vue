@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="$emit('submitted', username)">
     <input type="text" v-model="username" />
-    <button type="submit">Enviar</button>
+    <button type="submit">Get details</button>
   </form>
 </template>
 
