@@ -5,10 +5,12 @@ import Vuex from 'vuex'
 import UserView from "@/views/UserView";
 import VUserSearchForm from '@/components/VUserSearchForm'
 import VUserProfile from '@/components/VUserProfile'
+import ToastNotification from '@/components/ToastNotification'
 import initialState from '@/store/state'
 // import actions, i.e mock file from line 1
 import actions from '@/store/actions'
 import userFixture from './fixtures/user'
+import errorFixture from './fixtures/error'
 
 const localVue = createLocalVue()
 // set local vue instance
@@ -36,7 +38,8 @@ describe("UserView", () => {
       // selectors are returned as functions as we want to control when they are
       // actually searched for
       userSearchForm: () => wrapper.findComponent(VUserSearchForm),
-      userProfile: () => wrapper.findComponent(VUserProfile)
+      userProfile: () => wrapper.findComponent(VUserProfile),
+      toastNotification: () => wrapper.findComponent(ToastNotification)
     }
   }
 
@@ -66,6 +69,17 @@ describe("UserView", () => {
     const { userProfile } = build()
     //after passing data , confirm that VUserProfile has received the same user// as a prop
     expect(userProfile().vm.user).toBe(state.user)
+  })
+  it('passes an error message to the toast notification component', () =>{
+    state.error = errorFixture
+    const { toastNotification } = build()
+    expect(toastNotification().vm.errorDetail).toBe(state.error)
+
+  })
+  it('Displays toast notification only if user is not found', () =>{
+    state.error = {}
+    const {toastNotification} = build()
+    expect(toastNotification().exists()).toBe(false)
   })
 
   it('searches for a user when received submitted', () =>{

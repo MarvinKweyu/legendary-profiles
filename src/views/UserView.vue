@@ -14,6 +14,10 @@
     </svg>
     <VUserSearchForm @submitted="searchUser" />
     <VUserProfile :user="user" class="mt-3" />
+    <ToastNotification
+      :errorDetail="errorDetail"
+      v-if="Object.keys(errorDetail).length > 0"
+    />
   </div>
 </template>
 
@@ -21,16 +25,19 @@
 import { mapState } from "vuex";
 import VUserSearchForm from "@/components/VUserSearchForm";
 import VUserProfile from "@/components/VUserProfile";
+import ToastNotification from "@/components/ToastNotification";
 export default {
   name: "UserView",
   components: {
     VUserSearchForm,
     VUserProfile,
+    ToastNotification,
   },
   computed: {
     //get users from the store
     ...mapState({
       user: "user",
+      errorDetail: "error",
     }),
   },
   methods: {

@@ -6,5 +6,6 @@ exports[`UserView renders the component 1`] = `
   </svg>
   <vusersearchform-stub></vusersearchform-stub>
   <vuserprofile-stub user="[object Object]" class="mt-3"></vuserprofile-stub>
+  <!---->
 </div>
 `;

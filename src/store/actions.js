@@ -4,8 +4,10 @@ import axios from "axios"
 export default {
   SEARCH_USER({ commit }, { username }) {
     axios.get(`https://api.github.com/users/${username}`).then(response =>{
+      commit('SET_ERROR', null)
       commit("SET_USER", response.data);
     }).catch(error =>{
+      commit('SET_ERROR', username)
       console.log("error", error)
     })
 
