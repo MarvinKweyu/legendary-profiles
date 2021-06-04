@@ -1,6 +1,7 @@
 # legendary-profiles
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=legendary-profiles)
+[![CircleCI](https://circleci.com/gh/MarvinKweyu/legendary-profiles.svg?style=shield)](https://circleci.com/gh/MarvinKweyu/legendary-profiles)
 
 > A web application to get publicly available Github user information
 

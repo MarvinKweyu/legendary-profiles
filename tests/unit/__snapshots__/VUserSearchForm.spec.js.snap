@@ -1,3 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VUserSearchForm renders the component 1`] = `<form><input type="text"> <button type="submit">Enviar</button></form>`;
+exports[`VUserSearchForm renders the component 1`] = `
+<div class="container">
+  <h3>Enter a github username to get their details</h3>
+  <form class="my-3"><input type="text" placeholder="Github username" class="mx-1"> <button type="submit" class="btn btn-secondary btn-sm shadow-none my-1">
+      Get details
+    </button></form>
+</div>
+`;
